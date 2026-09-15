@@ -170,17 +170,19 @@
   /* Sections */
 
   .section {
+    --section-pad: clamp(2rem, 5vw, 3rem);
     display: grid;
-    grid-template-columns: 8rem minmax(0, 1fr);
+    grid-template-columns: 8.5rem minmax(0, 1fr);
     column-gap: clamp(1.5rem, 4vw, 3rem);
     row-gap: 1.25rem;
-    padding-block: clamp(2rem, 5vw, 3rem);
+    padding-block: var(--section-pad);
     border-top: 1px solid var(--line);
   }
 
+  /* The label sits just under the section's dividing line, above the level of the content beside it. */
   .section > h2 {
-    margin: 0;
-    padding-top: 0.45rem;
+    margin: calc(0.7rem - var(--section-pad)) 0 0;
+    padding: 0;
     align-self: start;
     display: flex;
     align-items: center;
@@ -197,8 +199,8 @@
   .section > h2::before {
     content: "";
     flex: none;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 2rem;
+    height: 2rem;
     background-color: var(--accent);
     -webkit-mask-position: center;
     mask-position: center;
@@ -212,6 +214,7 @@
   #skills::before { -webkit-mask-image: url("icons/toolbox.png"); mask-image: url("icons/toolbox.png"); }
   #projects::before { -webkit-mask-image: url("icons/knight.png"); mask-image: url("icons/knight.png"); }
   #education::before { -webkit-mask-image: url("icons/graduation-cap.png"); mask-image: url("icons/graduation-cap.png"); }
+  #hobbies::before { -webkit-mask-image: url("icons/puzzle.png"); mask-image: url("icons/puzzle.png"); }
 
   .section-body {
     display: grid;
@@ -399,6 +402,62 @@
     white-space: nowrap;
   }
 
+  /* Hobbies */
+
+  .hobbies {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1.25rem 2rem;
+  }
+
+  .hobbies li {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    align-items: center;
+    column-gap: 0.85rem;
+  }
+
+  /* Icons8 Puffy Filled icons used as masks, painted in the accent colour like the section icons. */
+  .hobby-icon {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--accent);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .hobby-icon-chess { -webkit-mask-image: url("icons/hobby-chess.png"); mask-image: url("icons/hobby-chess.png"); }
+  .hobby-icon-maths { -webkit-mask-image: url("icons/hobby-maths.png"); mask-image: url("icons/hobby-maths.png"); }
+  .hobby-icon-playstation { -webkit-mask-image: url("icons/hobby-playstation.png"); mask-image: url("icons/hobby-playstation.png"); }
+  .hobby-icon-reading { -webkit-mask-image: url("icons/hobby-reading.png"); mask-image: url("icons/hobby-reading.png"); }
+
+  .hobby-text {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .hobby-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--strong);
+  }
+
+  .hobby-note {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
   /* Credits */
 
   .credits {
@@ -414,7 +473,6 @@
 
   @media screen and (max-width: 48rem) {
     .section { grid-template-columns: minmax(0, 1fr); }
-    .section > h2 { padding-top: 0; }
   }
 
   @media screen and (max-width: 40rem) {
@@ -444,10 +502,10 @@
     .page { max-width: none; padding: 0; }
     .masthead { padding-bottom: 8mm; }
     h1 { font-size: 36pt; }
-    .section { padding-block: 6mm; grid-template-columns: 28mm minmax(0, 1fr); }
+    .section { --section-pad: 6mm; grid-template-columns: 28mm minmax(0, 1fr); }
     .flow, .points li, .tags { break-inside: avoid; }
     .entry-head, .skill dt { break-after: avoid; }
-    .flow li, .tags li, .points li::before, .section > h2::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .flow li, .tags li, .points li::before, .section > h2::before, .hobby-icon { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     a { text-decoration: none; }
     career-timeline { display: none; }
     a[data-print]::after { content: " (" attr(data-print) ")"; color: var(--muted); }
@@ -675,6 +733,40 @@
         </li>
 
       </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="hobbies">
+    <h2 id="hobbies">Hobbies</h2>
+    <div class="section-body">
+      <ul class="hobbies">
+        <li>
+          <span class="hobby-icon hobby-icon-chess" aria-hidden="true"></span>
+          <div class="hobby-text">
+            <span class="hobby-name">Chess</span>
+          </div>
+        </li>
+        <li>
+          <span class="hobby-icon hobby-icon-maths" aria-hidden="true"></span>
+          <div class="hobby-text">
+            <span class="hobby-name">Maths</span>
+            <span class="hobby-note">Working through courses on Brilliant</span>
+          </div>
+        </li>
+        <li>
+          <span class="hobby-icon hobby-icon-playstation" aria-hidden="true"></span>
+          <div class="hobby-text">
+            <span class="hobby-name">PlayStation</span>
+          </div>
+        </li>
+        <li>
+          <span class="hobby-icon hobby-icon-reading" aria-hidden="true"></span>
+          <div class="hobby-text">
+            <span class="hobby-name">Reading</span>
+            <span class="hobby-note">Currently <cite>Introduction to the Theory of Computation</cite> by Michael Sipser</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </section>
 
