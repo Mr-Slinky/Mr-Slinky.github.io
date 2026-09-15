@@ -24,6 +24,10 @@
  *
  * All periods share one bar, so the entries are expected not to overlap.
  *
+ * The bars always take pointer events. A page can therefore set pointer-events: none on the
+ * element, and a click anywhere else on the timeline reaches whatever lies beneath it, such as a
+ * link covering the card the timeline sits in.
+ *
  * Colours and fonts come from the page's custom properties (--paper, --ink, --accent and the
  * rest). Custom properties pass into the shadow root, so the timeline follows the page's light
  * and dark themes.
@@ -153,6 +157,7 @@ const STYLES = `
         -webkit-tap-highlight-color: transparent;
         background: var(--tl-accent);
         cursor: pointer;
+        pointer-events: auto;
         transition: height 0.15s ease;
     }
 
