@@ -125,9 +125,9 @@
   h1 span { display: block; }
 
   .lede {
-    max-width: 32ch;
-    font-size: clamp(1.15rem, 2.4vw, 1.375rem);
-    line-height: 1.45;
+    max-width: 50ch;
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    line-height: 1.5;
     color: var(--muted);
     text-wrap: pretty;
   }
@@ -161,6 +161,10 @@
   .section > h2 {
     margin: 0;
     padding-top: 0.45rem;
+    align-self: start;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
     font-family: var(--mono);
     font-size: 0.75rem;
     font-weight: 500;
@@ -168,6 +172,26 @@
     text-transform: uppercase;
     color: var(--muted);
   }
+
+  /* Icons8 icons used as masks, so each one is painted in the accent colour. */
+  .section > h2::before {
+    content: "";
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: var(--accent);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  #experience::before { -webkit-mask-image: url("icons/briefcase.png"); mask-image: url("icons/briefcase.png"); }
+  #skills::before { -webkit-mask-image: url("icons/toolbox.png"); mask-image: url("icons/toolbox.png"); }
+  #projects::before { -webkit-mask-image: url("icons/knight.png"); mask-image: url("icons/knight.png"); }
+  #education::before { -webkit-mask-image: url("icons/graduation-cap.png"); mask-image: url("icons/graduation-cap.png"); }
 
   .section-body {
     display: grid;
@@ -177,9 +201,22 @@
 
   .section-body p { max-width: 62ch; }
 
-  /* Project */
+  /* Entries */
 
-  .project-head {
+  .entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2.25rem;
+  }
+
+  .entry {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .entry-head {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -191,9 +228,9 @@
     margin: 0;
     font-family: var(--display);
     font-weight: 700;
-    font-size: 2rem;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: 1.375rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
     color: var(--strong);
   }
 
@@ -202,6 +239,42 @@
     font-size: 0.75rem;
     letter-spacing: 0.06em;
     color: var(--muted);
+  }
+
+  .points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    max-width: 62ch;
+  }
+
+  .points li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+
+  .points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.45rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .points strong {
+    font-weight: 600;
+    color: var(--strong);
+  }
+
+  .points code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--strong);
   }
 
   .flow {
@@ -302,6 +375,17 @@
     white-space: nowrap;
   }
 
+  /* Credits */
+
+  .credits {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
   /* Narrow screens */
 
   @media screen and (max-width: 48rem) {
@@ -334,8 +418,9 @@
     .masthead { padding-bottom: 8mm; }
     h1 { font-size: 36pt; }
     .section { padding-block: 6mm; grid-template-columns: 28mm minmax(0, 1fr); }
-    .skill, .flow { break-inside: avoid; }
-    .flow li, .tags li { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .flow, .points li, .tags { break-inside: avoid; }
+    .entry-head, .skill dt { break-after: avoid; }
+    .flow li, .tags li, .points li::before, .section > h2::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     a { text-decoration: none; }
     a[data-print]::after { content: " (" attr(data-print) ")"; color: var(--muted); }
   }
@@ -347,7 +432,7 @@
   <header class="masthead">
     <p class="role">Software developer</p>
     <h1><span>Kheagen</span> <span>Haskins</span></h1>
-    <p class="lede">I design and build data and reporting systems in Java.</p>
+    <p class="lede">I am a self-taught software developer. A psychology degree led me into teaching, and teaching coding led me into software development. Since 2025 I have been the only developer at IT Anywhere.</p>
     <ul class="contact">
       <li>South Africa</li>
       <li><a href="https://github.com/Mr-Slinky" data-print="github.com/Mr-Slinky">GitHub</a></li>
@@ -355,29 +440,61 @@
     </ul>
   </header>
 
-  <section class="section" aria-labelledby="work">
-    <h2 id="work">Work</h2>
+  <section class="section" aria-labelledby="experience">
+    <h2 id="experience">Experience</h2>
     <div class="section-body">
-      <div class="project-head">
-        <h3>Xhuma</h3>
-        <p class="meta">IT Anywhere &middot; 2025 to present</p>
-      </div>
-      <p>Xhuma is the reporting platform I build for IT Anywhere, a managed IT services provider. Each month it gives every client a report on the health and security of their IT.</p>
-      <ol class="flow" aria-label="How Xhuma works">
-        <li>
-          <span class="flow-name">8 data sources</span>
-          <span class="flow-note">Monitoring, antivirus, backups, helpdesk</span>
+      <ol class="entries">
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3>IT Anywhere</h3>
+            <p class="meta">Developer &middot; 2025 to present</p>
+          </div>
+          <p>IT Anywhere is a managed IT services provider. I built its data platform, Xhuma, which gives every client a monthly report on the health and security of their IT. The name is the Zulu word for &lsquo;to connect&rsquo;.</p>
+          <p>One half of Xhuma syncs data from eight sources into one database. The other half reads that data back out and turns it into configurable reports.</p>
+          <ol class="flow" aria-label="How Xhuma works">
+            <li>
+              <span class="flow-name">8 data sources</span>
+              <span class="flow-note">Snowflake, HaloPSA, N-central, Cove and more</span>
+            </li>
+            <li>
+              <span class="flow-name">1 database</span>
+              <span class="flow-note">SQL Server, refreshed every 4 hours</span>
+            </li>
+            <li>
+              <span class="flow-name">Client reports</span>
+              <span class="flow-note">PDF and Excel, every month</span>
+            </li>
+          </ol>
+          <p>Xhuma runs in production, and I made all 20 of its recorded design decisions. I designed each layer myself:</p>
+          <ul class="points">
+            <li><strong>Database.</strong> I designed the schema and administer the SQL Server database.</li>
+            <li><strong>Integrations.</strong> I built the API layers for REST, GraphQL and JSON-RPC.</li>
+            <li><strong>Domain model.</strong> I designed the business objects, which stay stable when the database changes.</li>
+            <li><strong>Reports.</strong> I design the PDF reports in HTML and CSS.</li>
+            <li><strong>Web.</strong> I built the web page that configures each report.</li>
+          </ul>
+          <p>Alongside Xhuma, I am the system administrator for HaloPSA, the company's service desk software. I configure its ticket types and workflows, and take on tickets that need a developer, such as website migrations and PHP debugging. During one migration I found a hacked website and cleaned it up.</p>
         </li>
-        <li>
-          <span class="flow-name">1 database</span>
-          <span class="flow-note">SQL Server, refreshed every 4 hours</span>
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Reddford House Northcliff</h3>
+            <p class="meta">Coding, robotics and IT teacher &middot; 2020 to 2024</p>
+          </div>
+          <p>I taught coding and robotics to primary school children, using LEGO Mindstorms EV3 robots and Swift Playgrounds. When Covid moved lessons online, I taught myself web development and taught HTML and CSS to Grade 4s.</p>
+          <p>From 2021 I also taught IEB Information Technology to Grades 10 to 12. I taught Java, wrote a textbook for the course, and helped matric students build their final-year projects.</p>
         </li>
-        <li>
-          <span class="flow-name">Client reports</span>
-          <span class="flow-note">PDF and Excel, every month</span>
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Dynamic Marketing</h3>
+            <p class="meta">Sales &middot; 2015</p>
+          </div>
+          <p>I sold TomTom GPS devices to shoppers in Makro, a large retail chain, approaching each person cold. The job built my confidence in talking to strangers and persuading them.</p>
         </li>
+
       </ol>
-      <p>I am the only developer on Xhuma, and I made each of its 20 recorded design decisions. Version 1 runs in production. Version 2, a ground-up rebuild of its core, has been under way since May 2026.</p>
     </div>
   </section>
 
@@ -389,14 +506,14 @@
         <div class="skill">
           <dt>Java</dt>
           <dd>
-            <p>Xhuma is written in framework-free Java, and its build fails when test coverage drops below a set minimum.</p>
+            <p>Xhuma is written in framework-free Java 25, split into modules that expose only their public API.</p>
             <ul class="tags">
               <li>Java 25</li>
               <li>JPMS modules</li>
+              <li>Records and sealed types</li>
               <li>Virtual threads</li>
               <li>JUnit 5</li>
               <li>Mockito</li>
-              <li>JaCoCo</li>
             </ul>
           </dd>
         </div>
@@ -444,13 +561,27 @@
         <div class="skill">
           <dt>Tooling</dt>
           <dd>
-            <p>I write command-line tools in Rust, including one that creates and seeds the development database.</p>
+            <p>Alongside Xhuma I wrote six command-line tools in Rust and a build script in Python:</p>
+            <ul class="points">
+              <li><code>xhuma-db</code> rebuilds a database from the schema files and fills its date and time tables. The Java integration tests call it before they run, because it starts much faster than a JVM.</li>
+              <li><code>xhuma-db-reset</code> does the same with the schema built into the program, so it runs on a machine that has no copy of the code.</li>
+              <li><code>dockwake</code> brings Docker Desktop back when Windows sleep leaves it stuck starting up, then restarts every container.</li>
+              <li><code>versioner</code> updates the version tags and last-modified dates in the Javadoc.</li>
+              <li><code>sloc</code> counts lines of code per language.</li>
+              <li><code>xhuma-icon</code> turns an SVG into a Windows app icon at several sizes.</li>
+              <li><code>build.py</code> builds every module in dependency order, clearing out files Windows keeps locked before it starts.</li>
+            </ul>
+            <p>Every Maven module takes its dependency versions from one shared bill of materials (BOM). A module's build fails when its test coverage drops below a set minimum, and Checkstyle, PMD and Spotless check the code's style. SQL Server runs in Docker for development and testing.</p>
             <ul class="tags">
               <li>Rust</li>
               <li>Python</li>
               <li>Maven</li>
-              <li>Git</li>
+              <li>JaCoCo</li>
+              <li>Checkstyle</li>
+              <li>PMD</li>
+              <li>Spotless</li>
               <li>Docker</li>
+              <li>Git</li>
             </ul>
           </dd>
         </div>
@@ -462,26 +593,61 @@
   <section class="section" aria-labelledby="projects">
     <h2 id="projects">Projects</h2>
     <div class="section-body">
-      <div class="project-head">
-        <h3>HackMaster</h3>
-        <p class="meta">2024 &middot; <a href="https://github.com/Mr-Slinky/HackMaster" data-print="github.com/Mr-Slinky/HackMaster">View on GitHub</a></p>
-      </div>
-      <p>HackMaster recreates the terminal hacking puzzle from the Fallout 3 and 4 video games. The player picks a password from a screen of words, and each wrong guess reports how many letters are in the right place.</p>
-      <p>Its screens update themselves whenever the game state changes, and it comes with a Windows installer.</p>
-      <ul class="tags">
-        <li>JavaFX</li>
-        <li>MVC</li>
-        <li>Observer pattern</li>
+      <ul class="entries">
+        <li class="entry">
+          <div class="entry-head">
+            <h3>HackMaster</h3>
+            <p class="meta">2024 &middot; <a href="https://github.com/Mr-Slinky/HackMaster" data-print="github.com/Mr-Slinky/HackMaster">View on GitHub</a></p>
+          </div>
+          <p>HackMaster recreates the terminal hacking puzzle from the Fallout 3 and 4 video games. The player picks a password from a screen of words, and each wrong guess reports how many letters are in the right place.</p>
+          <p>Its screens update themselves whenever the game state changes, and it comes with a Windows installer.</p>
+          <ul class="tags">
+            <li>JavaFX</li>
+            <li>MVC</li>
+            <li>Observer pattern</li>
+          </ul>
+        </li>
       </ul>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="teaching">
-    <h2 id="teaching">Teaching</h2>
+  <section class="section" aria-labelledby="education">
+    <h2 id="education">Education</h2>
     <div class="section-body">
-      <p>I taught Java programming to high school students in Grades 10 to 12, and wrote a textbook for those classes.</p>
+      <ol class="entries">
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Self-taught programming</h3>
+            <p class="meta">2020 to present &middot; <a href="https://www.linkedin.com/in/kheagen-haskins-b4215717b/details/certifications/" data-print="linkedin.com/in/kheagen-haskins-b4215717b/details/certifications">Certificates</a></p>
+          </div>
+          <p>I learnt to program through my teaching, my development work and my own projects. I completed most of Codecademy's Java courses, studied for Oracle's Java OCP exam, and relearnt maths on Brilliant.</p>
+          <p>My side projects moved from procedural noise to a small physics engine, and from there to entity component system (ECS) architecture.</p>
+        </li>
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Bachelor's degree</h3>
+            <p class="meta">2016 to 2019</p>
+          </div>
+          <p>I majored in Psychology and Communication Science at Varsity College Sandton (now Emeris).</p>
+        </li>
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Matric</h3>
+            <p class="meta">2014</p>
+          </div>
+          <p>I earned my National Senior Certificate at Maragon Private Schools (now Crawford Ruimsig).</p>
+        </li>
+
+      </ol>
     </div>
   </section>
+
+  <footer class="credits">
+    <p>Icons by <a href="https://icons8.com/">Icons8</a></p>
+  </footer>
 
 </main>
 </body>
