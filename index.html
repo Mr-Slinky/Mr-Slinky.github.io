@@ -100,8 +100,27 @@
 
   .masthead {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem clamp(1.5rem, 5vw, 3rem);
     padding-bottom: clamp(2.75rem, 7vw, 4.5rem);
+  }
+
+  .masthead-text {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .portrait {
+    display: block;
+    width: clamp(8rem, 20vw, 11.5rem);
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    outline: 1px solid var(--line);
+    outline-offset: 5px;
   }
 
   .role {
@@ -399,6 +418,9 @@
   }
 
   @media screen and (max-width: 40rem) {
+    .masthead { grid-template-columns: minmax(0, 1fr); }
+    .portrait { order: -1; width: 7rem; }
+
     .flow {
       --flow-gap: 1.75rem;
       grid-template-columns: minmax(0, 1fr);
@@ -436,14 +458,18 @@
 <main class="page">
 
   <header class="masthead">
-    <p class="role">Software developer</p>
-    <h1><span>Kheagen</span> <span>Haskins</span></h1>
-    <p class="lede">I am a self-taught software developer. A psychology degree led me into teaching, and teaching coding led me into software development. Since 2025 I have been the only developer at IT Anywhere.</p>
-    <ul class="contact">
-      <li>South Africa</li>
-      <li><a href="https://github.com/Mr-Slinky" data-print="github.com/Mr-Slinky">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/kheagen-haskins-b4215717b/" data-print="linkedin.com/in/kheagen-haskins-b4215717b">LinkedIn</a></li>
-    </ul>
+    <div class="masthead-text">
+      <p class="role">Software developer</p>
+      <h1><span>Kheagen</span> <span>Haskins</span></h1>
+      <p class="lede">I am a self-taught software developer. A psychology degree led me into teaching, and teaching coding led me into software development. Since 2025 I have been the only developer at IT Anywhere.</p>
+      <ul class="contact">
+        <li>South Africa</li>
+        <li><a href="mailto:slinky.haskins@gmail.com">slinky.haskins@gmail.com</a></li>
+        <li><a href="https://github.com/Mr-Slinky" data-print="github.com/Mr-Slinky">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/kheagen-haskins-b4215717b/" data-print="linkedin.com/in/kheagen-haskins-b4215717b">LinkedIn</a></li>
+      </ul>
+    </div>
+    <img class="portrait" src="images/portrait.jpg" alt="Kheagen Haskins holding a bulldog puppy" width="600" height="600">
   </header>
 
   <section class="section" aria-labelledby="experience">
