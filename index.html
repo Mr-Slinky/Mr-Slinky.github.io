@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<script type="module" src="timeline.js"></script>
 <style>
   /* Palette: night bordeaux #550c18, deep mocha #443730, olive wood #786452,
      dusty taupe #a5907e, soft blush #f7dad9. Olive wood and dusty taupe fall
@@ -327,6 +328,10 @@
     color: var(--muted);
   }
 
+  /* Timeline */
+
+  career-timeline { margin-bottom: 1.25rem; }
+
   /* Skills */
 
   .skills {
@@ -422,6 +427,7 @@
     .entry-head, .skill dt { break-after: avoid; }
     .flow li, .tags li, .points li::before, .section > h2::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     a { text-decoration: none; }
+    career-timeline { display: none; }
     a[data-print]::after { content: " (" attr(data-print) ")"; color: var(--muted); }
   }
 </style>
@@ -443,12 +449,13 @@
   <section class="section" aria-labelledby="experience">
     <h2 id="experience">Experience</h2>
     <div class="section-body">
+      <career-timeline></career-timeline>
       <ol class="entries">
 
-        <li class="entry">
+        <li class="entry" data-timeline="work">
           <div class="entry-head">
             <h3>IT Anywhere</h3>
-            <p class="meta">Developer &middot; 2025 to present</p>
+            <p class="meta"><span class="entry-role">Fullstack Developer</span> &middot; <time datetime="2025-05">May 2025</time> to present</p>
           </div>
           <p>IT Anywhere is a managed IT services provider. I built its data platform, Xhuma, which gives every client a monthly report on the health and security of their IT. The name is the Zulu word for &lsquo;to connect&rsquo;.</p>
           <p>One half of Xhuma syncs data from eight sources into one database. The other half reads that data back out and turns it into configurable reports.</p>
@@ -477,19 +484,19 @@
           <p>Alongside Xhuma, I am the system administrator for HaloPSA, the company's service desk software. I configure its ticket types and workflows, and take on tickets that need a developer, such as website migrations and PHP debugging. During one migration I found a hacked website and cleaned it up.</p>
         </li>
 
-        <li class="entry">
+        <li class="entry" data-timeline="work">
           <div class="entry-head">
             <h3>Reddford House Northcliff</h3>
-            <p class="meta">Coding, robotics and IT teacher &middot; 2020 to 2024</p>
+            <p class="meta"><span class="entry-role">Coding, robotics and IT teacher</span> &middot; <time datetime="2020">2020</time> to <time datetime="2024-07">July 2024</time></p>
           </div>
           <p>I taught coding and robotics to primary school children, using LEGO Mindstorms EV3 robots and Swift Playgrounds. When Covid moved lessons online, I taught myself web development and taught HTML and CSS to Grade 4s.</p>
           <p>From 2021 I also taught IEB Information Technology to Grades 10 to 12. I taught Java, wrote a textbook for the course, and helped matric students build their final-year projects.</p>
         </li>
 
-        <li class="entry">
+        <li class="entry" data-timeline="work">
           <div class="entry-head">
             <h3>Dynamic Marketing</h3>
-            <p class="meta">Sales &middot; 2015</p>
+            <p class="meta"><span class="entry-role">Junior sales representative</span> &middot; <time datetime="2015-01">January</time> to <time datetime="2015-05">May 2015</time></p>
           </div>
           <p>I sold TomTom GPS devices to shoppers in Makro, a large retail chain, approaching each person cold. The job built my confidence in talking to strangers and persuading them.</p>
         </li>
@@ -625,10 +632,10 @@
           <p>My side projects moved from procedural noise to a small physics engine, and from there to entity component system (ECS) architecture.</p>
         </li>
 
-        <li class="entry">
+        <li class="entry" data-timeline="study">
           <div class="entry-head">
             <h3>Bachelor's degree</h3>
-            <p class="meta">2016 to 2019</p>
+            <p class="meta"><time datetime="2016">2016</time> to <time datetime="2018">2018</time></p>
           </div>
           <p>I majored in Psychology and Communication Science at Varsity College Sandton (now Emeris).</p>
         </li>
