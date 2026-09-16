@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coding Philosophy</title>
+<meta name="description" content="How Kheagen Haskins chooses tools, why he keeps architecture out of a framework's hands, and how he works with AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page">
+
+  <header class="masthead masthead-compact">
+    <div class="masthead-name">
+      <p class="role">Coding philosophy</p>
+      <h1><span>Kheagen</span> <span>Haskins</span></h1>
+    </div>
+    <img class="portrait" src="images/portrait.jpg" alt="Kheagen Haskins holding a bulldog puppy" width="600" height="600">
+    <div class="masthead-intro">
+      <p class="more"><a href="index.html"><span class="more-arrow" aria-hidden="true">&larr;</span> Back to the CV</a></p>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="tldr">
+    <h2 id="tldr">In short</h2>
+    <div class="section-body">
+      <ul class="points">
+        <li>No language, framework or tool is the best one. The answer is always "it depends", and working out what it depends on is the job.</li>
+        <li>I choose a tool on what it costs to learn, how much control it gives me, how hard the choice is to undo, who maintains it afterwards, and what it charges.</li>
+        <li>A framework is a bought toolbox. It fits when you already know the job, and on the first day of a project nobody does.</li>
+        <li>At work I buy other people's plumbing and build what is specific to us. On my own projects I build the part I am there to learn.</li>
+        <li>AI writes code for me once I could write the test for it, and not before. The architecture stays mine.</li>
+        <li>The rules I keep whatever else changes: tests, code I can explain, and decisions written down.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="philosophy">
+    <h2 id="philosophy">Philosophy</h2>
+    <div class="section-body">
+      <div class="prose">
+
+        <h3>"It depends" is the whole thing</h3>
+        <p>I hold no view that one language, framework or tool is the best one, and I treat software as something that keeps changing under me. What is left after that is a single rule: it depends.</p>
+        <p>That sounds like a way of avoiding an answer. It is the opposite. A developer who knows one framework can solve almost any problem in that framework's shape, and will, because the shape is already in their hands. Answering "it depends" means going back to the problem first, every time, and that is more work than reaching for the familiar thing.</p>
+        <p>I reject dogma, not guidelines. A guideline is a default I can justify and can argue myself out of. Dogma is a rule kept because it is the rule, applied without looking at what is in front of me. I keep plenty of the first kind.</p>
+
+        <h3>How I choose a tool</h3>
+        <p>Five questions decide it, and their answers change from problem to problem.</p>
+        <ul class="points">
+          <li><strong>Entry cost.</strong> How long before I am productive, and how much of the tool must I hold in my head?</li>
+          <li><strong>Control.</strong> When the tool's defaults are wrong for me, can I still get what I want?</li>
+          <li><strong>Reversibility.</strong> If this turns out to be the wrong call, what does it cost to undo?</li>
+          <li><strong>Ownership.</strong> Who maintains this in three years, and who fixes it the night it breaks?</li>
+          <li><strong>Licence and money.</strong> What does it charge now, and what does it charge once it matters?</li>
+        </ul>
+        <p>The reports are the clearest example. I needed full control over how a client report looks, and I did not have the months it would take to learn how PDFs are put together. So I took a library with a small API surface that lets me lay a report out in HTML and CSS, which is a language I already know, and render it to PDF. The better-known alternative carries a licence cost the company was never going to pay. That decision has nothing to do with taste. It is the five questions answered for one problem.</p>
+
+        <h3>Frameworks are a bought toolbox</h3>
+        <p>A framework is somebody else's toolbox, bought whole. That is a good deal when the box holds what the job needs, and the trouble is that nobody knows what the job needs on day one. You lack hindsight about your own project, and in a business you are also serving people who are not technical, whose picture of the work changes as they see it.</p>
+        <p>So I build something small, put it in front of people, and iterate. That is not a method and it prescribes nothing: it says nothing about which tools to use, how to test, or how the work should ship.</p>
+        <p>What it does say is that early decisions should be cheap to undo. A framework is an expensive decision to reverse, because it owns the entry point and calls your code, and everything you write takes its shape. Code you wrote to hold two libraries together is cheap to reverse. That is the real reason my own system is a set of libraries that its apps call, with no Spring and no dependency-injection container in sight. Its modules seal their internals, reflection stays out of the runtime, and each app ships as a small self-contained image. Constructor parameters typed as interfaces gave me everything a container would have, with a stack trace I can read.</p>
+        <p>None of that makes Spring wrong. It makes it wrong here.</p>
+
+        <h3>Build or buy</h3>
+        <p>The usual advice is to take the industry tool over writing your own. I think that advice hides an assumption: that the tool solves exactly your problem, at exactly your scope. Often it does not, and then the advice asks you to carry a heavy dependency to reach one function.</p>
+        <p>"A library has fewer bugs than my code" is not a law either. Every library has bugs. What a library really buys you is other people's maintenance, other people's edge cases, and somebody else patching the security hole at two in the morning. Those are worth a great deal, and they are the actual reason to buy.</p>
+        <p>So the split I work to is this. What is specific to us, I build. What is everybody's plumbing, I buy. In practice that means I wrote the layer that generates our SQL from our own schema, because no library knows our tables, while the connection pool, the JSON parser, the spreadsheet writer and the PDF renderer are all other people's work.</p>
+        <p>On my own projects the default flips, because the goal is different. Work is where I ship. My own projects are where I learn, and reaching for a library there hands the interesting part to someone else, which leaves me building the same thing at the same level forever. So I hand-roll the part I am there to learn and take libraries for everything around it, and I keep the goal of the project honest: if it exists to be shipped, I buy as much as I can.</p>
+
+        <h3>Working with AI</h3>
+        <p>A philosophy written in 2026 that leaves AI out is ignoring the thing in the middle of the room. These are my own views, taken from how I work.</p>
+        <p>I use AI every day and I am careful about what I use it for. It is a fast typist and a good thinking partner. It is not a designer, and it makes no decisions about my systems. One question decides whether I let a model write code or keep talking to it.</p>
+        <blockquote class="pull">Could I write the test for this right now?</blockquote>
+        <p>If I can, the thought is finished. I know what correct looks like, so reviewing what comes back costs me almost nothing, and the model is a typist who now and then makes a mistake I spot at a glance. If I cannot, I am still thinking, and code generated at that point costs more to review than to write, because I would be working out what I wanted and whether I got it at the same time.</p>
+        <p>Architecture stays with me. Module boundaries, the domain model, the trade-offs behind each choice and the order the work happens in are mine, and I write them down as I go. The engine I built at work has 20 recorded design decisions, and I made every one of them. A model reads the code in front of it and guesses at the rest, so its output is locally plausible and can be globally wrong. The job I keep is decomposition: breaking a system-sized problem into pieces small enough to be worth handing over.</p>
+        <p>The risk I watch for is not messy code. It is the gap between what the system does and what I understand about it, and that gap hides well, because the tests pass and the build is green. So I hold myself to one rule: if I could not rebuild a piece of code from my understanding of it, meaning its structure and its decisions rather than its exact wording, then I do not understand it well enough to own it. When that happens I simplify it, go and learn the idea properly, or write it myself, since writing it is how I learn it.</p>
+        <p>Strict architecture helps here too. Modules seal their internals, so code that reaches across a boundary fails to compile. Sealed types close the set of permitted implementations, so an invented subtype fails the build. SQL is generated from the schema instead of typed by hand, so a raw query stands out at once. Every module carries a coverage floor, so code that arrives without tests takes the build down with it. The tighter the constraints, the smaller the space of output that can pass, and the faster the review.</p>
+        <p>Two findings keep me honest about all this. In a 2025 controlled trial by METR, experienced developers took 19% longer on their tasks while using AI tools, and still believed they had been 24% faster. In an Anthropic study of comprehension, developers who used AI to ask questions held their understanding at around 65%, while those who used it to generate code directly dropped below 40%. How you use it decides what you walk away with, so I judge my own use by finished work rather than by how quick the session felt.</p>
+        <p>I also keep a record of where I have used it. Files a model wrote carry its name in their author tag, and the repository records the date from which that applies. I would rather show that line than claim there is not one.</p>
+
+        <h3>What I do not compromise on</h3>
+        <p>Rejecting dogma is not the same as having no rules. Three hold whatever the project is. Every behaviour I care about has a test. Every line I commit is one I can explain and could rebuild. Every decision that shapes a system is written down where the next person can find it, even when the next person is me in a year.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="credits">
+    <p><a href="index.html">Back to the CV</a></p>
+    <p>Icons by <a href="https://icons8.com/">Icons8</a></p>
+  </footer>
+
+</main>
+</body>
+</html>
