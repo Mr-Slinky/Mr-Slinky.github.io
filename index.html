@@ -110,14 +110,22 @@
     padding-bottom: clamp(2.75rem, 7vw, 4.5rem);
   }
 
-  .masthead-text {
+  /* The name sits beside the portrait, and the bio and links run the full width beneath both. */
+  .masthead-name {
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+  }
+
+  .masthead-intro {
+    grid-column: 1 / -1;
     display: grid;
     gap: 1rem;
   }
 
   .portrait {
     display: block;
-    width: clamp(8rem, 20vw, 11.5rem);
+    width: clamp(5.5rem, 18vw, 11.5rem);
     max-width: 100%;
     height: auto;
     aspect-ratio: 1;
@@ -149,7 +157,7 @@
   h1 span { display: block; }
 
   .lede {
-    max-width: 50ch;
+    max-width: 62ch;
     font-size: clamp(1.1rem, 2vw, 1.25rem);
     line-height: 1.5;
     color: var(--muted);
@@ -168,8 +176,41 @@
     color: var(--muted);
   }
 
-  .contact a { color: var(--ink); }
+  .contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
   .contact a:hover { color: var(--accent); }
+
+  /* Only the words carry the underline, so the logo beside them stays clean. */
+  .contact a span {
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+  }
+
+  .contact a::before {
+    content: "";
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    background-color: var(--accent);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .contact-email::before { -webkit-mask-image: url("icons/contact-email.png"); mask-image: url("icons/contact-email.png"); }
+  .contact-github::before { -webkit-mask-image: url("icons/contact-github.png"); mask-image: url("icons/contact-github.png"); }
+  .contact-linkedin::before { -webkit-mask-image: url("icons/contact-linkedin.png"); mask-image: url("icons/contact-linkedin.png"); }
 
   /* Sections */
 
@@ -557,9 +598,6 @@
   }
 
   @media screen and (max-width: 40rem) {
-    .masthead { grid-template-columns: minmax(0, 1fr); }
-    .portrait { order: -1; width: 7rem; }
-
     .flow {
       --flow-gap: 1.75rem;
       grid-template-columns: minmax(0, 1fr);
@@ -586,7 +624,7 @@
     .section { --section-pad: 6mm; grid-template-columns: 28mm minmax(0, 1fr); }
     .flow, .points li, .tags { break-inside: avoid; }
     .entry-head, .skill dt { break-after: avoid; }
-    .flow li, .tags li, .points li::before, .section > h2::before, .hobby-icon { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .flow li, .tags li, .points li::before, .section > h2::before, .hobby-icon, .contact a::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     a { text-decoration: none; }
     .summary { display: none; }
     a[data-print]::after { content: " (" attr(data-print) ")"; color: var(--muted); }
@@ -597,18 +635,20 @@
 <main class="page">
 
   <header class="masthead">
-    <div class="masthead-text">
+    <div class="masthead-name">
       <p class="role">Software developer</p>
       <h1><span>Kheagen</span> <span>Haskins</span></h1>
+    </div>
+    <img class="portrait" src="images/portrait.jpg" alt="Kheagen Haskins holding a bulldog puppy" width="600" height="600">
+    <div class="masthead-intro">
       <p class="lede">I am a self-taught software developer. A psychology degree led me into teaching, and teaching coding led me into software development. Since 2025 I have been the only developer at IT Anywhere.</p>
       <ul class="contact">
         <li>South Africa</li>
-        <li><a href="mailto:slinky.haskins@gmail.com">slinky.haskins@gmail.com</a></li>
-        <li><a href="https://github.com/Mr-Slinky" data-print="github.com/Mr-Slinky">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/kheagen-haskins-b4215717b/" data-print="linkedin.com/in/kheagen-haskins-b4215717b">LinkedIn</a></li>
+        <li><a class="contact-email" href="mailto:slinky.haskins@gmail.com"><span>slinky.haskins@gmail.com</span></a></li>
+        <li><a class="contact-github" href="https://github.com/Mr-Slinky" data-print="github.com/Mr-Slinky"><span>GitHub</span></a></li>
+        <li><a class="contact-linkedin" href="https://www.linkedin.com/in/kheagen-haskins-b4215717b/" data-print="linkedin.com/in/kheagen-haskins-b4215717b"><span>LinkedIn</span></a></li>
       </ul>
     </div>
-    <img class="portrait" src="images/portrait.jpg" alt="Kheagen Haskins holding a bulldog puppy" width="600" height="600">
   </header>
 
   <section class="summary" aria-label="Summary">
@@ -638,7 +678,7 @@
 
         <li class="entry" data-timeline="work">
           <div class="entry-head">
-            <h3>IT Anywhere</h3>
+            <h3>IT Anywhere (Pty) Ltd</h3>
             <p class="meta"><span class="entry-role">Fullstack Developer</span> &middot; <time datetime="2025-05">May 2025</time> to present</p>
           </div>
           <p>IT Anywhere is a managed IT services provider. I built its data platform, Xhuma, which gives every client a monthly report on the health and security of their IT. The name is the Zulu word for &lsquo;to connect&rsquo;.</p>
@@ -646,7 +686,7 @@
           <ol class="flow" aria-label="How Xhuma works">
             <li>
               <span class="flow-name">8 data sources</span>
-              <span class="flow-note">Snowflake, HaloPSA, N-central, Cove and more</span>
+              <span class="flow-note">Ticketing, monitoring, backups, security training</span>
             </li>
             <li>
               <span class="flow-name">1 database</span>
@@ -660,12 +700,12 @@
           <p>Xhuma runs in production, and I made all 20 of its recorded design decisions. I designed each layer myself:</p>
           <ul class="points">
             <li><strong>Database.</strong> I designed the schema and administer the SQL Server database.</li>
-            <li><strong>Integrations.</strong> I built the API layers for REST, GraphQL and JSON-RPC.</li>
+            <li><strong>Integrations.</strong> I built the API layers that read ticketing and monitoring over REST, security training over GraphQL, backups over JSON-RPC and the data warehouse over JDBC.</li>
             <li><strong>Domain model.</strong> I designed the business objects, which stay stable when the database changes.</li>
             <li><strong>Reports.</strong> I design the PDF reports in HTML and CSS.</li>
             <li><strong>Web.</strong> I built the web page that configures each report.</li>
           </ul>
-          <p>Alongside Xhuma, I am the system administrator for HaloPSA, the company's service desk software. I configure its ticket types and workflows, and take on tickets that need a developer, such as website migrations and PHP debugging. During one migration I found a hacked website and cleaned it up.</p>
+          <p>Alongside Xhuma, I am the system administrator for the company's service desk system. I configure its ticket types and workflows, and take on tickets that need a developer, such as website migrations and PHP debugging. During one migration I found a hacked website and cleaned it up.</p>
         </li>
 
         <li class="entry" data-timeline="work">
@@ -715,7 +755,7 @@
             <p>I wrote the code that generates Xhuma's SQL and protects it from SQL injection. The data sync loads only new and changed rows, and recovers when a database connection drops.</p>
             <ul class="tags">
               <li>SQL Server</li>
-              <li>Snowflake</li>
+              <li>Data warehousing</li>
               <li>JDBC</li>
               <li>HikariCP</li>
             </ul>
