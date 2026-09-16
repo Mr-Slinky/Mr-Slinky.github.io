@@ -94,7 +94,7 @@
   }
 
   .page {
-    max-width: 52rem;
+    max-width: 68rem;
     margin-inline: auto;
     padding-inline: clamp(1rem, 5vw, 3rem);
     padding-block: clamp(3rem, 9vw, 6.5rem);
@@ -157,7 +157,6 @@
   h1 span { display: block; }
 
   .lede {
-    max-width: 62ch;
     font-size: clamp(1.1rem, 2vw, 1.25rem);
     line-height: 1.5;
     color: var(--muted);
@@ -268,7 +267,6 @@
     min-width: 0;
   }
 
-  .section-body p { max-width: 62ch; }
 
   /* Entries */
 
@@ -316,7 +314,6 @@
     padding: 0;
     display: grid;
     gap: 0.5rem;
-    max-width: 62ch;
   }
 
   .points li {
@@ -530,14 +527,13 @@
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-    gap: 1.25rem 2rem;
+    gap: 1.6rem;
   }
 
   .hobbies li {
     display: grid;
     grid-template-columns: 2rem minmax(0, 1fr);
-    align-items: center;
+    align-items: start;
     column-gap: 0.85rem;
   }
 
@@ -557,12 +553,11 @@
 
   .hobby-icon-chess { -webkit-mask-image: url("icons/hobby-chess.png"); mask-image: url("icons/hobby-chess.png"); }
   .hobby-icon-maths { -webkit-mask-image: url("icons/hobby-maths.png"); mask-image: url("icons/hobby-maths.png"); }
-  .hobby-icon-playstation { -webkit-mask-image: url("icons/hobby-playstation.png"); mask-image: url("icons/hobby-playstation.png"); }
   .hobby-icon-reading { -webkit-mask-image: url("icons/hobby-reading.png"); mask-image: url("icons/hobby-reading.png"); }
 
   .hobby-text {
     display: grid;
-    gap: 0.15rem;
+    gap: 0.3rem;
   }
 
   .hobby-name {
@@ -681,9 +676,9 @@
             <h3>IT Anywhere (Pty) Ltd</h3>
             <p class="meta"><span class="entry-role">Fullstack Developer</span> &middot; <time datetime="2025-05">May 2025</time> to present</p>
           </div>
-          <p>IT Anywhere is a managed IT services provider. I built its data platform, Xhuma, which gives every client a monthly report on the health and security of their IT. The name is the Zulu word for &lsquo;to connect&rsquo;.</p>
-          <p>One half of Xhuma syncs data from eight sources into one database. The other half reads that data back out and turns it into configurable reports.</p>
-          <ol class="flow" aria-label="How Xhuma works">
+          <p>IT Anywhere is a managed IT services provider. I built its reporting engine, which gives every client a monthly report on the health and security of their IT.</p>
+          <p>One half of the engine syncs data from eight sources into one database. The other half reads that data back out and turns it into configurable reports.</p>
+          <ol class="flow" aria-label="How the reporting engine works">
             <li>
               <span class="flow-name">8 data sources</span>
               <span class="flow-note">Ticketing, monitoring, backups, security training</span>
@@ -697,7 +692,7 @@
               <span class="flow-note">PDF and Excel, every month</span>
             </li>
           </ol>
-          <p>Xhuma runs in production, and I made all 20 of its recorded design decisions. I designed each layer myself:</p>
+          <p>The engine runs in production, and I made all 20 of its recorded design decisions. I designed each layer myself:</p>
           <ul class="points">
             <li><strong>Database.</strong> I designed the schema and administer the SQL Server database.</li>
             <li><strong>Integrations.</strong> I built the API layers that read ticketing and monitoring over REST, security training over GraphQL, backups over JSON-RPC and the data warehouse over JDBC.</li>
@@ -705,7 +700,7 @@
             <li><strong>Reports.</strong> I design the PDF reports in HTML and CSS.</li>
             <li><strong>Web.</strong> I built the web page that configures each report.</li>
           </ul>
-          <p>Alongside Xhuma, I am the system administrator for the company's service desk system. I configure its ticket types and workflows, and take on tickets that need a developer, such as website migrations and PHP debugging. During one migration I found a hacked website and cleaned it up.</p>
+          <p>Alongside the engine, I am the system administrator for the company's service desk system. I configure its ticket types and workflows, and take on tickets that need a developer, such as website migrations and PHP debugging. During one migration I found a hacked website and cleaned it up.</p>
         </li>
 
         <li class="entry" data-timeline="work">
@@ -737,7 +732,7 @@
         <div class="skill">
           <dt>Java</dt>
           <dd>
-            <p>Xhuma is written in framework-free Java 25, split into modules that expose only their public API.</p>
+            <p>The reporting engine is written in framework-free Java 25, split into modules that expose only their public API.</p>
             <ul class="tags">
               <li>Java 25</li>
               <li>JPMS modules</li>
@@ -752,7 +747,7 @@
         <div class="skill">
           <dt>Data</dt>
           <dd>
-            <p>I wrote the code that generates Xhuma's SQL and protects it from SQL injection. The data sync loads only new and changed rows, and recovers when a database connection drops.</p>
+            <p>I wrote the code that generates the engine's SQL and protects it from SQL injection. The data sync loads only new and changed rows, and recovers when a database connection drops.</p>
             <ul class="tags">
               <li>SQL Server</li>
               <li>Data warehousing</li>
@@ -778,7 +773,7 @@
         <div class="skill">
           <dt>Reports and apps</dt>
           <dd>
-            <p>Xhuma produces Excel workbooks and PDF reports with charts. Its apps run on Windows as standalone programs that bundle their own Java runtime.</p>
+            <p>The engine produces Excel workbooks and PDF reports with charts. Its apps run on Windows as standalone programs that bundle their own Java runtime.</p>
             <ul class="tags">
               <li>OpenHTMLToPDF</li>
               <li>Apache POI</li>
@@ -792,16 +787,8 @@
         <div class="skill">
           <dt>Tooling</dt>
           <dd>
-            <p>Alongside Xhuma I wrote six command-line tools in Rust and a build script in Python:</p>
-            <ul class="points">
-              <li><code>xhuma-db</code> rebuilds a database from the schema files and fills its date and time tables. The Java integration tests call it before they run, because it starts much faster than a JVM.</li>
-              <li><code>xhuma-db-reset</code> does the same with the schema built into the program, so it runs on a machine that has no copy of the code.</li>
-              <li><code>dockwake</code> brings Docker Desktop back when Windows sleep leaves it stuck starting up, then restarts every container.</li>
-              <li><code>versioner</code> updates the version tags and last-modified dates in the Javadoc.</li>
-              <li><code>sloc</code> counts lines of code per language.</li>
-              <li><code>xhuma-icon</code> turns an SVG into a Windows app icon at several sizes.</li>
-              <li><code>build.py</code> builds every module in dependency order, clearing out files Windows keeps locked before it starts.</li>
-            </ul>
+            <p>I write command-line tools in Rust for the jobs around a build that are slow by hand or easy to get wrong. One of them counts a project's lines of code, leaving out comments and blank lines, so the figure describes the code that was written rather than the size of the files.</p>
+            <p>The others follow the same pattern. They rebuild a test database from the schema files fast enough for the integration tests to call before every run, bring Docker back when Windows sleep leaves it stuck, keep version tags across the source in step, and build every module in dependency order.</p>
             <p>Every Maven module takes its dependency versions from one shared bill of materials (BOM). A module's build fails when its test coverage drops below a set minimum, and Checkstyle, PMD and Spotless check the code's style. SQL Server runs in Docker for development and testing.</p>
             <ul class="tags">
               <li>Rust</li>
@@ -884,26 +871,22 @@
           <span class="hobby-icon hobby-icon-chess" aria-hidden="true"></span>
           <div class="hobby-text">
             <span class="hobby-name">Chess</span>
+            <p class="hobby-note">I have played since I was young, without ever taking it too seriously. At Reddford House I was the chess coach for every age group, which gave me games against some very talented students. I still play casually with anyone willing to sit down for one.</p>
           </div>
         </li>
         <li>
           <span class="hobby-icon hobby-icon-maths" aria-hidden="true"></span>
           <div class="hobby-text">
             <span class="hobby-name">Maths</span>
-            <span class="hobby-note">Working through courses on Brilliant</span>
-          </div>
-        </li>
-        <li>
-          <span class="hobby-icon hobby-icon-playstation" aria-hidden="true"></span>
-          <div class="hobby-text">
-            <span class="hobby-name">PlayStation</span>
+            <p class="hobby-note">Maths interested me only after school, when I took it up again as a toolkit for solving problems. I use the Brilliant app to stay sharp and to learn new ideas, then put them to work in my own projects, especially the ones about computer graphics such as my noise generator.</p>
           </div>
         </li>
         <li>
           <span class="hobby-icon hobby-icon-reading" aria-hidden="true"></span>
           <div class="hobby-text">
             <span class="hobby-name">Reading</span>
-            <span class="hobby-note">Currently <cite>Introduction to the Theory of Computation</cite> by Michael Sipser</span>
+            <p class="hobby-note">Reading is almost the wrong name for this one, because I read to learn rather than for a story. I have read maybe two novels in my life. What I enjoy is gathering information, and as a programmer nearly everything I learn is useful straight away, so reading is part of how I keep growing.</p>
+            <p class="hobby-note">Currently <cite>Introduction to the Theory of Computation</cite> by Michael Sipser.</p>
           </div>
         </li>
       </ul>
