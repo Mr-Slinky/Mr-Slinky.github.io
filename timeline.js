@@ -22,7 +22,8 @@
  *     means January 2016 and an end of 2018 means December 2018.
  *   - data-timeline="study" draws the period as an outlined bar. Any other value draws it solid.
  *
- * All periods share one bar, so the entries are expected not to overlap.
+ * Periods that overlap are drawn on their own lane, one under the other, so two roles held at the
+ * same time both stay visible.
  *
  * The bars always take pointer events. A page can therefore set pointer-events: none on the
  * element, and a click anywhere else on the timeline reaches whatever lies beneath it, such as a
@@ -90,17 +91,16 @@ const STYLES = `
 
     .track {
         position: relative;
-        height: 1.75rem;
+        height: calc(var(--lanes, 1) * 1.75rem);
         margin-top: 0.3rem;
     }
 
-    /* The spine runs the full width of the track, behind the ticks and the periods. */
-    .track::before {
-        content: "";
+    /* One spine per lane, running the full width behind the ticks and the periods. */
+    .lane-line {
         position: absolute;
         left: 0;
         right: 0;
-        top: 50%;
+        top: calc((var(--lane) + 0.5) * 100% / var(--lanes, 1));
         height: 1px;
         transform: translateY(-50%);
         background: var(--tl-line);
@@ -109,16 +109,16 @@ const STYLES = `
     .tick {
         position: absolute;
         top: -1.2rem;
-        bottom: 20%;
+        bottom: 0;
         width: 1px;
         background: var(--tl-line);
     }
 
-    /* Joins the open card to the period it describes. */
+    /* Joins the open card to the period it describes, starting at that period's lane. */
     .pointer {
         position: absolute;
-        top: 50%;
-        height: calc(50% + var(--card-gap));
+        top: calc((var(--lane, 0) + 0.5) * 100% / var(--lanes, 1));
+        height: calc(100% - ((var(--lane, 0) + 0.5) * 100% / var(--lanes, 1)) + var(--card-gap));
         width: 1px;
         background: var(--tl-accent);
         opacity: 0;
@@ -145,7 +145,7 @@ const STYLES = `
         position: absolute;
         left: 0;
         right: 0;
-        top: 50%;
+        top: calc((var(--lane, 0) + 0.5) * 100% / var(--lanes, 1));
         height: 0.75rem;
         margin: 0;
         padding: 0;
@@ -184,7 +184,7 @@ const STYLES = `
 
     .now {
         position: absolute;
-        top: 50%;
+        top: calc(0.5 * 100% / var(--lanes, 1));
         width: 0.5rem;
         height: 0.5rem;
         border-radius: 50%;
@@ -292,6 +292,7 @@ class CareerTimeline extends HTMLElement {
     #buttons = [];
     #cards = [];
     #centres = [];
+    #lanes = [];
     #details = null;
     #pointer = null;
 
@@ -341,9 +342,20 @@ class CareerTimeline extends HTMLElement {
         const style = document.createElement("style");
         style.textContent = STYLES;
 
+        this.#lanes = assignLanes(periods, now);
+        const laneCount = Math.max(...this.#lanes) + 1;
+
         const yearAxis = createElement("div", "axis");
         yearAxis.setAttribute("aria-hidden", "true");
         const track = createElement("div", "track");
+        track.style.setProperty("--lanes", String(laneCount));
+
+        for (let lane = 0; lane < laneCount; lane++) {
+            const line = createElement("span", "lane-line");
+            line.setAttribute("aria-hidden", "true");
+            line.style.setProperty("--lane", String(lane));
+            track.append(line);
+        }
 
         // A tick at the start of every year the axis reaches, and a label for every year it spans.
         for (let year = axis.start / 12; year * 12 <= axis.end; year++) {
@@ -373,6 +385,7 @@ class CareerTimeline extends HTMLElement {
             const item = document.createElement("li");
             item.style.left = `${left}%`;
             item.style.width = `${right - left}%`;
+            item.style.setProperty("--lane", String(this.#lanes[index]));
 
             const button = createElement("button", `period ${period.kind}`);
             button.type = "button";
@@ -464,6 +477,7 @@ class CareerTimeline extends HTMLElement {
 
         if (open) {
             this.#pointer.style.left = `${this.#centres[index]}%`;
+            this.#pointer.style.setProperty("--lane", String(this.#lanes[index]));
         }
     }
 }
@@ -557,6 +571,23 @@ function computeAxis(periods, now) {
 
 function computePercent(axis, month) {
     return ((month - axis.start) / axis.span) * 100;
+}
+
+/**
+ * Places each period on a lane, taking the first lane whose last period has already ended and
+ * opening a new lane otherwise. Periods arrive earliest first, so two roles held at the same time
+ * end up on lanes of their own.
+ */
+function assignLanes(periods, now) {
+    const laneEnds = [];
+    return periods.map((period) => {
+        const start = period.start.index;
+        const end = period.end ? period.end.index + 1 : now;
+        const free = laneEnds.findIndex((laneEnd) => laneEnd <= start);
+        const lane = free === -1 ? laneEnds.length : free;
+        laneEnds[lane] = end;
+        return lane;
+    });
 }
 
 function createCard(period, left, currentMonth) {
