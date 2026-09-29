@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kheagen Haskins</title>
+<meta name="description" content="CV of Kheagen Haskins, software developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<script type="module" src="timeline.js"></script>
+<script type="module" src="skills.js"></script>
+<script type="module" src="engine-flow.js"></script>
+<script type="module" src="print.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page">
+
+  <header class="masthead">
+    <div class="masthead-name">
+      <p class="role">Java &middot; SQL &middot; Full-stack development</p>
+      <h1><span>Kheagen</span> <span>Haskins</span></h1>
+    </div>
+    <img class="portrait" src="images/portrait.jpg" alt="Kheagen Haskins holding a bulldog puppy" width="600" height="600">
+    <div class="masthead-intro">
+      <p class="lede">Full-stack developer working in Java and SQL, with most of my work on the backend. I am the only developer at a managed IT services provider, where I designed and built the reporting engine that produces every client's monthly report. Teaching is how I got here. A psychology degree led me into it, and teaching Java led me into building software full time.</p>
+      <ul class="contact">
+        <li>South Africa</li>
+        <li><a class="contact-email" href="mailto:slinky.haskins@gmail.com"><span>slinky.haskins@gmail.com</span></a></li>
+        <li><a class="contact-github" href="https://github.com/Mr-Slinky" data-print="github.com/Mr-Slinky"><span>GitHub</span></a></li>
+        <li><a class="contact-linkedin" href="https://www.linkedin.com/in/kheagen-haskins-b4215717b/" data-print="linkedin.com/in/kheagen-haskins-b4215717b"><span>LinkedIn</span></a></li>
+        <li>References and full contact details are in my private CV, available on request.</li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="summary" aria-label="Summary">
+    <div class="widget">
+      <a class="widget-link" href="#experience">Career <span class="widget-arrow" aria-hidden="true">&darr;</span></a>
+      <career-timeline></career-timeline>
+    </div>
+    <div class="widget">
+      <a class="widget-link" href="#skills">Languages <span class="widget-arrow" aria-hidden="true">&darr;</span></a>
+      <skill-bands>
+        <dl>
+          <div>
+            <dt>Primary</dt>
+            <dd>Java, SQL Server</dd>
+          </div>
+          <div>
+            <dt>Working knowledge</dt>
+            <dd>HTML, CSS, JavaScript, Python, Rust</dd>
+          </div>
+        </dl>
+      </skill-bands>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="experience">
+    <h2 id="experience">Experience</h2>
+    <div class="section-body">
+      <ol class="entries">
+
+        <li class="entry" data-timeline="work">
+          <div class="entry-head">
+            <h3>Managed IT services provider, Johannesburg and Durban</h3>
+            <p class="meta"><span class="entry-role">Full-stack developer</span> &middot; <time datetime="2025-05">May 2025</time> to present</p>
+          </div>
+          <p>I am the company's only developer. I designed and built its reporting platform, which syncs data from nine vendor systems into one database and turns that data into a monthly report for each of the company's roughly 40 clients.</p>
+          <p class="group-label">Responsibilities</p>
+          <ul class="duties">
+            <li class="duty duty-wide">
+              <span class="duty-name">Full-stack engineer</span>
+              <p class="duty-note">I write all of the code, from the SQL that builds the database to the web server that runs the reports.</p>
+              <ol class="chain" aria-label="Every layer I write, from the database up">
+                <li><span>SQL schema</span></li>
+                <li><span>SQL queries</span></li>
+                <li><span>Java data access</span></li>
+                <li><span>PDF reports</span></li>
+                <li><span>Web server</span></li>
+              </ol>
+            </li>
+            <li class="duty">
+              <span class="duty-name">Database administrator</span>
+              <p class="duty-note">I created the SQL Server database, change it as the platform grows, and keep it healthy.</p>
+            </li>
+            <li class="duty">
+              <span class="duty-name">Tester</span>
+              <p class="duty-note">I write and run every test, and I configured the CI/CD pipeline that runs them.</p>
+            </li>
+            <li class="duty">
+              <span class="duty-name">DevOps</span>
+              <p class="duty-note">I built the pipeline that tests, builds and deploys the platform to our on-premises production server. A runbook I wrote covers recovery by hand.</p>
+            </li>
+          </ul>
+          <p class="group-label">Achievements</p>
+          <dl class="stats">
+            <div class="stat">
+              <dt>Developer</dt>
+              <dd class="stat-value">1</dd>
+              <dd class="stat-note">I built a full production data platform by myself, and it produces every client's monthly report.</dd>
+            </div>
+            <div class="stat">
+              <dt>Report speed</dt>
+              <dd class="stat-value">2&times;</dd>
+              <dd class="compare">
+                <div class="compare-row">
+                  <span class="compare-label">Speed</span>
+                  <span class="compare-bars" aria-hidden="true"><span style="--size: 0.5"></span><span style="--size: 1"></span></span>
+                </div>
+                <div class="compare-row">
+                  <span class="compare-label">Data per report</span>
+                  <span class="compare-bars" aria-hidden="true"><span style="--size: 0.55"></span><span style="--size: 1"></span></span>
+                </div>
+                <ul class="split-legend compare-legend">
+                  <li>Legacy system</li>
+                  <li>My platform</li>
+                </ul>
+              </dd>
+              <dd class="stat-note">Reports generate roughly twice as fast as on the legacy system, and include almost twice as much data.</dd>
+            </div>
+            <div class="stat">
+              <dt>Deployment</dt>
+              <dd class="stat-value stat-word">Automated</dd>
+              <dd class="stat-note">Every deploy runs the tests and the build on GitHub first. On the server, it waits for any running sync to finish, then checks the new version's health. A deploy that fails any step rolls itself back, and GitHub emails me the failure.</dd>
+            </div>
+          </dl>
+          <div class="folds">
+            <details class="fold">
+              <summary>How I review my code</summary>
+              <div class="fold-body">
+                <p>As the company's sole developer, I review all of my own code. My experience of peer review comes from teaching, where senior teachers moderated my exam papers and I moderated theirs. At work, I run layered AI audits, each covering one concern: correctness, conventions, documentation or test coverage. I repeat them until the findings turn trivial. They catch real mistakes, but a senior engineer sees what they miss, which is why working with experienced developers is a large part of what I want next.</p>
+              </div>
+            </details>
+            <details class="fold">
+              <summary>Service desk administration</summary>
+              <div class="fold-body">
+                <p>Alongside the engine, I am the system administrator for the company's service desk system. I configure its ticket types and workflows, and take on the occasional ticket that needs a developer.</p>
+              </div>
+            </details>
+          </div>
+        </li>
+
+      </ol>
+      <div class="jobs">
+        <p class="group-label">Other roles</p>
+        <ol class="folds">
+
+          <li data-timeline="work">
+            <details class="fold job">
+              <summary>
+                <span class="job-line">
+                  <span class="entry-head">
+                    <h3>Tutoring company</h3>
+                    <span class="meta"><span class="entry-role">Java tutor</span> &middot; <time datetime="2025-07">July 2025</time> to present</span>
+                  </span>
+                  <span class="job-hook">Java, SQL and Python tutoring for high school and university students.</span>
+                </span>
+              </summary>
+              <div class="fold-body">
+                <p>Alongside my development work I tutor students from Grade 10 on the IEB syllabus up to their first years at university. Most of the work is diagnosis. I find the idea a student has actually misunderstood, then explain it in terms they already understand.</p>
+                <p class="group-label">Responsibilities</p>
+                <ul class="duties">
+                  <li class="duty">
+                    <span class="duty-name">Tutor</span>
+                    <p class="duty-note">I explain and teach Java, SQL and Python to students at every level.</p>
+                  </li>
+                </ul>
+                <p class="group-label">Achievements</p>
+                <dl class="stats">
+                  <div class="stat">
+                    <dt>Student work</dt>
+                    <dd class="stat-value stat-word">Exhibited</dd>
+                    <dd class="stat-note">Students I tutor have had their code featured in local school exhibitions.</dd>
+                  </div>
+                </dl>
+              </div>
+            </details>
+          </li>
+
+          <li data-timeline="work">
+            <details class="fold job">
+              <summary>
+                <span class="job-line">
+                  <span class="entry-head">
+                    <h3>Independent school, Johannesburg</h3>
+                    <span class="meta"><span class="entry-role">Coding, robotics and IT teacher</span> &middot; <time datetime="2020">2020</time> to <time datetime="2024-07">July 2024</time></span>
+                  </span>
+                  <span class="job-hook">Taught IEB Information Technology in Java, and wrote the textbook for the course.</span>
+                </span>
+              </summary>
+              <div class="fold-body">
+                <p>I joined in 2020 to teach coding and robotics to primary school children, using LEGO Mindstorms EV3 robots and Swift Playgrounds. From 2021 I also taught IEB Information Technology to Grades 10 to 12, a syllabus taught in Java. I wrote a textbook for the course and coached matric students through their final-year projects.</p>
+                <p class="group-label">Responsibilities</p>
+                <ul class="duties">
+                  <li class="duty duty-wide">
+                    <span class="duty-name">Curriculum designer</span>
+                    <p class="duty-note">When Covid moved lessons online, I wrote the school's coding and robotics syllabus from scratch, and the school kept it after Covid ended. Other schools later added coding and robotics, but this syllabus was ours alone. By Grade 9, students had published their own CV website.</p>
+                    <ol class="chain" aria-label="What students learnt as they moved up the grades">
+                      <li><span>Grade 3: binary</span></li>
+                      <li><span>Grade 4: HTML</span></li>
+                      <li><span>Grade 9: a live CV in HTML, CSS and JavaScript</span></li>
+                    </ol>
+                  </li>
+                  <li class="duty">
+                    <span class="duty-name">Examiner</span>
+                    <p class="duty-note">I set every test and exam I gave. Senior IT teachers moderated each paper, round after round, until they found nothing left to fix.</p>
+                  </li>
+                  <li class="duty">
+                    <span class="duty-name">Moderator</span>
+                    <p class="duty-note">I moderated many other IT teachers' exams, as well as the school's own Computer Applications Technology (CAT) exams.</p>
+                  </li>
+                  <li class="duty">
+                    <span class="duty-name">Remedial educator</span>
+                    <p class="duty-note">I taught coding successfully to students with a range of disabilities, including cerebral palsy and autism.</p>
+                  </li>
+                </ul>
+                <p class="group-label">Achievements</p>
+                <dl class="stats">
+                  <div class="stat">
+                    <dt>IT average</dt>
+                    <dd class="stat-value">+20%</dd>
+                    <dd class="stat-note">I raised the average percentage for IT by over 20%.</dd>
+                  </div>
+                  <div class="stat">
+                    <dt>Youngest coders</dt>
+                    <dd class="stat-value stat-word">Grade 3</dd>
+                    <dd class="stat-note">My syllabus taught binary to Grade 3s and HTML to Grade 4s, and both age groups did well.</dd>
+                  </div>
+                </dl>
+              </div>
+            </details>
+          </li>
+
+          <li data-timeline="work">
+            <details class="fold job">
+              <summary>
+                <span class="job-line">
+                  <span class="entry-head">
+                    <h3>Royal Sitting Services</h3>
+                    <span class="meta"><span class="entry-role">Co-founder</span> &middot; <time datetime="2017">2017</time> to <time datetime="2020">2020</time></span>
+                  </span>
+                  <span class="job-hook">Co-founded a pet-sitting business that grew past what two people could run.</span>
+                </span>
+              </summary>
+              <div class="fold-body">
+                <p>My partner and I started a pet-sitting business while I was at college. Bookings filled up faster than the two of us could take them, so we interviewed and hired more sitters to keep up. Covid ended the business in 2020, just as I began teaching.</p>
+              </div>
+            </details>
+          </li>
+
+          <li data-timeline="work">
+            <details class="fold job">
+              <summary>
+                <span class="job-line">
+                  <span class="entry-head">
+                    <h3>Retail promotions agency</h3>
+                    <span class="meta"><span class="entry-role">Junior sales representative</span> &middot; <time datetime="2015-01">January</time> to <time datetime="2015-05">May 2015</time></span>
+                  </span>
+                  <span class="job-hook">Sold GPS devices in Makro, approaching every shopper cold.</span>
+                </span>
+              </summary>
+              <div class="fold-body">
+                <p class="group-label">Responsibilities</p>
+                <ul class="duties">
+                  <li class="duty">
+                    <span class="duty-name">Sales</span>
+                    <p class="duty-note">I sold TomTom GPS devices to shoppers in Makro, a large retail chain, approaching each person cold.</p>
+                  </li>
+                </ul>
+                <p>The job built my confidence in talking to strangers and persuading them.</p>
+              </div>
+            </details>
+          </li>
+
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="problems">
+    <h2 id="problems">Hard problems</h2>
+    <div class="section-body">
+      <p>These are the hardest problems I have solved in the reporting engine. I worked out how each of them should work myself. My starting point was the old reports, and sometimes the API behind their data.</p>
+      <ol class="entries problems">
+
+        <li class="entry">
+          <div class="entry-head">
+            <h3>Syncing from a data warehouse billed per query</h3>
+          </div>
+          <p>The hardest source to sync was a data warehouse billed per query. Loading its tables into an empty database was quick to build. Keeping them up to date afterwards was the real work, and each fix exposed the next problem.</p>
+          <engine-flow layout="steps">
+            <ol class="flow" aria-label="Problems in the warehouse sync, in the order they appeared">
+              <li>
+                <span class="flow-name">Schema changes</span>
+                <span class="flow-note">The vendor changed it without notice</span>
+                <p class="flow-detail">The vendor changed its schema without notice. Before the sync fetches anything, it now checks that it can map every column it will write, and it reports a mismatch as a schema failure.</p>
+              </li>
+              <li>
+                <span class="flow-name">Slow or hung</span>
+                <span class="flow-note">A slow response looked like a dead one</span>
+                <p class="flow-detail">Syncs began to hang, and nothing could tell a slow response from a dead one. I moved to reading 50,000 rows a page, with a time limit on each page, and a stalled page is retried on a fresh connection. Paging then raised the questions every sync has to answer, such as what to roll back when the sixth page fails, and what to do with half a page.</p>
+              </li>
+              <li>
+                <span class="flow-name">Measuring</span>
+                <span class="flow-note">A few tables took far longer</span>
+                <p class="flow-detail">I built diagnostic tables into the database that record each sync's errors and the time taken for every source and table. A day or two of production data showed a few tables taking far longer than the rest. I therefore moved those tables onto a schedule of their own, reading them four times a month to save warehouse credit.</p>
+              </li>
+              <li>
+                <span class="flow-name">Finding changed rows</span>
+                <span class="flow-note">Reading whole tables cost too much</span>
+                <p class="flow-detail">Reading every table whole on every run cost too much on the largest ones. Where a table has change-tracking columns, the sync now pulls only the rows that changed since its last run, in pages sorted on the table's key. A table without them is read whole, and the largest of those are read at most once a day.</p>
+              </li>
+              <li>
+                <span class="flow-name">History</span>
+                <span class="flow-note">A late request for every record's past</span>
+                <p class="flow-detail">To meet a late request for the history of every record, I added slowly changing dimension (SCD) tracking to the warehouse's three main tables and to seven tables from a second source. It keeps each past version of a record alongside the current one. When I measured the warehouse's history, 588,000 stored versions held only 50,000 distinct states, so a new version is kept only when a record actually changes. Each table has its own tracking policy for now, and I am working towards a general set of rules that new tables can follow.</p>
+              </li>
+            </ol>
+          </engine-flow>
+          <ul class="tags">
+            <li>Data warehousing</li>
+            <li>Paging</li>
+            <li>Incremental sync</li>
+            <li>Slowly changing dimensions</li>
+          </ul>
+        </li>
+
+        <li class="entry entry-wide">
+          <div class="entry-head">
+            <h3>Replacing hundreds of API calls with one query</h3>
+          </div>
+          <div class="lead-stat">
+            <p>A vendor's REST API returned records one client and one page at a time, meaning collecting all of them took hundreds of requests in a row. I found a way to fetch the same data with a single query, and moved the collection onto it. Adding a new kind of data no longer means new API code. It takes a query file, a mapping from its columns to a Java record, and the table the rows land in.</p>
+            <dl class="stats">
+              <div class="stat">
+                <dt>Collection speed</dt>
+                <dd class="stat-value">186&times;</dd>
+                <dd class="stat-note">The single query against the paged REST calls, as measured and recorded in the decision record that made the switch.</dd>
+              </div>
+            </dl>
+          </div>
+          <ul class="tags">
+            <li>SQL</li>
+            <li>REST</li>
+            <li>Performance</li>
+          </ul>
+        </li>
+
+        <li class="entry entry-card">
+          <div class="entry-head">
+            <h3>Separating the reports from the schema</h3>
+          </div>
+          <p>My first classes copied their tables. As a result, a changed table meant a redesigned class. Every piece of code that used the class then changed with it. I split the data layer into thirteen areas. Eleven match a part of the report, such as tickets, hardware, backups, patches, email security and security training. The other two hold the client list and each report's saved settings. Each area is an interface that returns typed records, and its SQL and implementation stay hidden behind it. A change to the database is now made behind those interfaces, where the reports never see it.</p>
+          <ul class="tags">
+            <li>Domain modelling</li>
+            <li>Data access layer</li>
+          </ul>
+        </li>
+
+        <li class="entry entry-card">
+          <div class="entry-head">
+            <h3>Branded charts in PDF reports</h3>
+          </div>
+          <p>The reports needed charts in the company's branding. The engine draws each chart as SVG from a client's data, with no chart library: eight chart types, from bar and line charts to gauges, each written in Java. The cover page, stat cards and score boxes are SVG files with slots the engine fills, so marketing can change their layout by editing a file. A report that still contains an unfilled slot fails rather than reaching a client.</p>
+          <ul class="tags">
+            <li>SVG</li>
+            <li>Templating</li>
+          </ul>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="skills">
+    <h2 id="skills">Skills</h2>
+    <div class="section-body">
+      <ul class="skills">
+
+        <li class="skill skill-wide" tabindex="0">
+          <div class="skill-inner">
+            <div class="skill-face skill-front">
+              <h3>Java</h3>
+              <ul class="tags">
+                <li>Java 25</li>
+                <li>Framework-free</li>
+                <li>JPMS modules</li>
+                <li>Records and sealed types</li>
+                <li>Virtual threads</li>
+                <li>JUnit 5</li>
+                <li>Mockito</li>
+              </ul>
+              <p class="skill-hint"><span class="on-hover">Hover to read how I use it</span><span class="on-touch">Tap to read how I use it</span></p>
+            </div>
+            <div class="skill-face skill-back">
+              <p class="skill-label">Java</p>
+              <p>The engine is a set of libraries that its apps call, rather than a framework that calls them. It is built on the standard Java APIs and a few small, focused libraries, and I wire it together by hand with plain constructor calls. A stack trace therefore follows my own code from the call to the failure.</p>
+              <p>The sync's classes receive their dependencies through their constructors, meaning tests can pass in their own doubles. The sync runs its sources in the order their data depends on each other, and runs independent sources at the same time on virtual threads. The library modules seal their internals under JPMS, the Java module system. As a result, one module reaches another only through what that module exports.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="skill" tabindex="0">
+          <div class="skill-inner">
+            <div class="skill-face skill-front">
+              <h3>Data</h3>
+              <ul class="tags">
+                <li>SQL Server</li>
+                <li>Data warehousing</li>
+                <li>HikariCP</li>
+              </ul>
+              <p class="skill-hint"><span class="on-hover">Hover to read how I use it</span><span class="on-touch">Tap to read how I use it</span></p>
+            </div>
+            <div class="skill-face skill-back">
+              <p class="skill-label">Data</p>
+              <p>I wrote the code that generates the sync's SQL from the schema and protects it from SQL injection. Where a source reports what changed, the sync loads only new and changed rows. A stalled query is retried on a fresh connection, and a table that fails catches up on the next run.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="skill" tabindex="0">
+          <div class="skill-inner">
+            <div class="skill-face skill-front">
+              <h3>APIs</h3>
+              <ul class="tags">
+                <li>REST</li>
+                <li>GraphQL</li>
+                <li>JSON-RPC</li>
+                <li>OAuth 2.0</li>
+              </ul>
+              <p class="skill-hint"><span class="on-hover">Hover to read how I use it</span><span class="on-touch">Tap to read how I use it</span></p>
+            </div>
+            <div class="skill-face skill-back">
+              <p class="skill-label">APIs</p>
+              <p>Most vendor connections are rate-limited and retry failed calls with growing delays, waiting without holding a thread. Login tokens refresh safely while many calls run at once. Guards on the connections reject any call that could change data, since one vendor's token could reboot client machines.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="skill" tabindex="0">
+          <div class="skill-inner">
+            <div class="skill-face skill-front">
+              <h3>Reports and apps</h3>
+              <ul class="tags">
+                <li>OpenHTMLToPDF</li>
+                <li>Apache POI</li>
+                <li>JavaFX</li>
+                <li>Undertow</li>
+                <li>jpackage</li>
+              </ul>
+              <p class="skill-hint"><span class="on-hover">Hover to read how I use it</span><span class="on-touch">Tap to read how I use it</span></p>
+            </div>
+            <div class="skill-face skill-back">
+              <p class="skill-label">Reports and apps</p>
+              <p>The engine produces Excel workbooks and PDF reports with charts. Every report keeps the same two rules: no section is ever left out, and no figure is shown for a period its data does not reach. Its apps ship as standalone programs that bundle their own Java runtime.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="skill skill-wide" tabindex="0">
+          <div class="skill-inner">
+            <div class="skill-face skill-front">
+              <h3>Tooling</h3>
+              <ul class="tags">
+                <li>Rust</li>
+                <li>Python</li>
+                <li>Maven</li>
+                <li>JaCoCo</li>
+                <li>Checkstyle</li>
+                <li>PMD</li>
+                <li>Spotless</li>
+                <li>Docker</li>
+                <li>Git</li>
+                <li>GitHub Actions</li>
+              </ul>
+              <p class="skill-hint"><span class="on-hover">Hover to read how I use it</span><span class="on-touch">Tap to read how I use it</span></p>
+            </div>
+            <div class="skill-face skill-back">
+              <p class="skill-label">Tooling</p>
+              <p>I write command-line tools in Rust for the jobs around a build that are slow by hand or easy to get wrong. The reporting engine uses several of them. They build and seed its test database, update the version tags in its Javadoc, and turn its SVG icons into app icons. Another counts lines of code, leaving out comments and blank lines.</p>
+              <p>Every Maven module takes its dependency versions from one shared bill of materials (BOM). Eight modules fail the build when their test coverage drops below a set minimum, and Checkstyle, PMD and Spotless check the code's style. Tests also enforce the architecture: SQL has to live in its own files, and the library modules cannot pull in a logging backend. SQL Server runs in Docker for development and testing, and GitHub Actions builds and deploys the apps.</p>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="projects">
+    <h2 id="projects">Projects</h2>
+    <div class="section-body">
+      <ul class="projects">
+        <li class="project">
+          <div class="project-head">
+            <h3>Slicket</h3>
+            <p class="meta">2026 &middot; <a href="https://github.com/Mr-Slinky/slicket" data-print="github.com/Mr-Slinky/slicket">GitHub</a></p>
+          </div>
+          <p class="project-hook">A ticketing system in Rust, designed around an entity component system, with every AI contribution in its own commit.</p>
+          <ul class="tags">
+            <li>Rust</li>
+            <li>Entity component system</li>
+            <li>Cargo workspace</li>
+          </ul>
+          <details class="fold project-more">
+            <summary>Read more</summary>
+            <div class="fold-body">
+              <p>Slicket is a ticketing system I am building in Rust. I administer a well-known service desk system at work and find it complicated to use. Slicket is my attempt at one that feels better. Its backend is designed around an entity component system (ECS), a design where each thing, such as a ticket, is a bare ID with its data stored in separate components. Systems then run the logic over every ID that has the components they need. It is at an early stage of design: the entity and component types are built, and the storage and systems come next.</p>
+              <p>It also shows how I work with AI. On its <code>dev</code> branch, my work and the AI's go in separate commits, and each commit's author records whose work it contains. Anyone can see exactly where I used AI.</p>
+            </div>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="education">
+    <h2 id="education">Education</h2>
+    <div class="section-body">
+      <ol class="edu">
+
+        <li class="edu-item edu-current">
+          <p class="edu-when">2020 to present</p>
+          <div class="edu-body">
+            <div class="entry-head">
+              <h3>Self-taught programming</h3>
+              <p class="meta"><a href="https://www.linkedin.com/in/kheagen-haskins-b4215717b/details/certifications/" data-print="linkedin.com/in/kheagen-haskins-b4215717b/details/certifications">Certificates</a></p>
+            </div>
+            <p>I learnt to program through my teaching, my development work and my own projects. I also relearnt maths on Brilliant, to use it as a tool. Each project led into the next.</p>
+            <ol class="flow" aria-label="How each self-taught project led into the next">
+              <li>
+                <span class="flow-name">Noise generator</span>
+                <span class="flow-note">Draws natural-looking textures and terrain from maths</span>
+              </li>
+              <li>
+                <span class="flow-name">Maths</span>
+                <span class="flow-note">The maths behind the noise</span>
+              </li>
+              <li>
+                <span class="flow-name">ECS architecture</span>
+                <span class="flow-note">The way data is laid out drives the design</span>
+              </li>
+            </ol>
+          </div>
+        </li>
+
+        <li class="edu-item" data-timeline="study">
+          <p class="edu-when"><time datetime="2024-08">August 2024</time> to <time datetime="2025-04">April 2025</time></p>
+          <div class="edu-body">
+            <div class="entry-head">
+              <h3>Professional Java</h3>
+              <p class="meta"><span class="entry-role">Full-time independent study</span></p>
+            </div>
+            <p>After leaving teaching, I spent most of a year learning Java as industry uses it rather than as a school syllabus teaches it. I learnt Git, and worked through Codecademy's courses on Java and on the Spring framework.</p>
+          </div>
+        </li>
+
+        <li class="edu-item" data-timeline="study">
+          <p class="edu-when"><time datetime="2016">2016</time> to <time datetime="2018">2018</time></p>
+          <div class="edu-body">
+            <h3>Bachelor of Arts</h3>
+            <p>I completed a three-year BA at Varsity College Sandton (now Emeris), majoring in Psychology and Communication Science.</p>
+          </div>
+        </li>
+
+        <li class="edu-item">
+          <p class="edu-when">2014</p>
+          <div class="edu-body">
+            <h3>Matric</h3>
+            <p>I earned my National Senior Certificate at Maragon Private Schools (now Crawford Ruimsig).</p>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="extras">
+    <h2 id="extras">Extras</h2>
+    <div class="section-body">
+      <div class="extras">
+        <div class="widget">
+          <a class="widget-link" href="philosophy.html">Coding philosophy <span class="widget-arrow" aria-hidden="true">&rarr;</span></a>
+          <p>How I choose tools, why my systems keep frameworks at arm's length, and how I work with AI.</p>
+        </div>
+        <div class="widget">
+          <a class="widget-link" href="hobbies.html">Hobbies <span class="widget-arrow" aria-hidden="true">&rarr;</span></a>
+          <p>Outside work I write code for myself, play chess, study mathematics and read computer science.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="credits">
+    <p>Icons by <a href="https://icons8.com/">Icons8</a></p>
+  </footer>
+
+</main>
+</body>
+</html>
