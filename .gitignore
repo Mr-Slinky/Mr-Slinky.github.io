@@ -1,0 +1,2 @@
+# Ignores every folder named local, at any depth
+local/
