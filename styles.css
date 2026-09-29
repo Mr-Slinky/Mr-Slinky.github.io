@@ -1,0 +1,1168 @@
+  /* Palette: pale slate #bfbdc1, dim grey #6d6a75, shadow grey #37323e, metallic gold #deb841,
+     honey bronze #de9e36. Gold and bronze are as light as pale slate (about 1.1:1), which leaves
+     them invisible as marks on the light page. Light mode therefore paints text and icons in
+     shadow grey and uses gold as a fill behind dark text. Dark mode uses gold and bronze for
+     text, icons and marks, where each reaches over 5:1 on shadow grey. */
+  :root {
+    --gold: #deb841;
+    --bronze: #de9e36;
+
+    --paper: #bfbdc1;
+    --surface: rgb(109 106 117 / 0.14);
+    --ink: #37323e;
+    --strong: #37323e;
+    --muted: #37323e;
+    --line: #6d6a75;
+    --accent: #37323e;
+    --accent-2: #37323e;
+    --accent-soft: #deb841;
+    --shadow: 0 14px 32px -14px rgb(55 50 62 / 0.45), 0 2px 6px rgb(55 50 62 / 0.1);
+
+    --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --text: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: "JetBrains Mono", "Cascadia Mono", Consolas, ui-monospace, monospace;
+
+    color-scheme: light;
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #37323e;
+      --surface: rgb(109 106 117 / 0.22);
+      --ink: #bfbdc1;
+      --strong: #bfbdc1;
+      --muted: #bfbdc1;
+      --line: #6d6a75;
+      --accent: #deb841;
+      --accent-2: #de9e36;
+      --accent-soft: rgb(222 184 65 / 0.22);
+      --shadow: 0 14px 32px -14px rgb(0 0 0 / 0.6), 0 2px 6px rgb(0 0 0 / 0.25);
+      color-scheme: dark;
+    }
+  }
+
+  @media screen {
+    :root[data-theme="dark"] {
+      --paper: #37323e;
+      --surface: rgb(109 106 117 / 0.22);
+      --ink: #bfbdc1;
+      --strong: #bfbdc1;
+      --muted: #bfbdc1;
+      --line: #6d6a75;
+      --accent: #deb841;
+      --accent-2: #de9e36;
+      --accent-soft: rgb(222 184 65 / 0.22);
+      --shadow: 0 14px 32px -14px rgb(0 0 0 / 0.6), 0 2px 6px rgb(0 0 0 / 0.25);
+      color-scheme: dark;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  p { margin: 0; }
+
+  a {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+  }
+
+  a:hover { color: var(--accent-2); }
+
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .page {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 5vw, 3rem);
+    padding-block: clamp(3rem, 9vw, 6.5rem);
+  }
+
+  /* Masthead */
+
+  .masthead {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem clamp(1.5rem, 5vw, 3rem);
+    padding-bottom: clamp(2.75rem, 7vw, 4.5rem);
+  }
+
+  /* The name sits beside the portrait, and the bio and links run the full width beneath both. */
+  .masthead-name {
+    display: grid;
+    align-content: center;
+    gap: 1rem;
+  }
+
+  .masthead-intro {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .portrait {
+    display: block;
+    width: clamp(5.5rem, 18vw, 11.5rem);
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    outline: 1px solid var(--line);
+    outline-offset: 5px;
+  }
+
+  .role {
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(3.25rem, 13vw, 6.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--strong);
+  }
+
+  h1 span { display: block; }
+
+  .lede {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    line-height: 1.5;
+    color: var(--muted);
+    text-wrap: pretty;
+  }
+
+  .contact {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .contact a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .contact a:hover { color: var(--accent-2); }
+
+  /* Only the words carry the underline, so the logo beside them stays clean. */
+  .contact a span {
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+  }
+
+  .contact a::before {
+    content: "";
+    flex: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    background-color: var(--accent);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .contact-email::before { -webkit-mask-image: url("icons/contact-email.png"); mask-image: url("icons/contact-email.png"); }
+  .contact-github::before { -webkit-mask-image: url("icons/contact-github.png"); mask-image: url("icons/contact-github.png"); }
+  .contact-linkedin::before { -webkit-mask-image: url("icons/contact-linkedin.png"); mask-image: url("icons/contact-linkedin.png"); }
+
+  /* Sections */
+
+  .section {
+    --section-pad: clamp(2rem, 5vw, 3rem);
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    column-gap: clamp(1.5rem, 4vw, 3rem);
+    row-gap: 1.25rem;
+    padding-block: var(--section-pad);
+    border-top: 1px solid var(--line);
+  }
+
+  /* The label sits just under the section's dividing line, above the level of the content beside it. */
+  .section > h2 {
+    margin: calc(0.7rem - var(--section-pad)) 0 0;
+    padding: 0;
+    scroll-margin-top: 2rem;
+    align-self: start;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Icons8 icons used as masks, so each one is painted in the accent colour. */
+  .section > h2::before {
+    content: "";
+    flex: none;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--accent);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  #experience::before { -webkit-mask-image: url("icons/briefcase.png"); mask-image: url("icons/briefcase.png"); }
+  #problems::before { -webkit-mask-image: url("icons/puzzle.png"); mask-image: url("icons/puzzle.png"); }
+  #skills::before { -webkit-mask-image: url("icons/toolbox.png"); mask-image: url("icons/toolbox.png"); }
+  #projects::before { -webkit-mask-image: url("icons/knight.png"); mask-image: url("icons/knight.png"); }
+  #education::before { -webkit-mask-image: url("icons/graduation-cap.png"); mask-image: url("icons/graduation-cap.png"); }
+  #hobbies::before { -webkit-mask-image: url("icons/puzzle.png"); mask-image: url("icons/puzzle.png"); }
+  #extras::before { -webkit-mask-image: url("icons/extras.png"); mask-image: url("icons/extras.png"); }
+  #philosophy::before { -webkit-mask-image: url("icons/habits.png"); mask-image: url("icons/habits.png"); }
+  #tldr::before { -webkit-mask-image: url("icons/tldr.png"); mask-image: url("icons/tldr.png"); }
+
+  .section-body {
+    display: grid;
+    gap: 1.1rem;
+    min-width: 0;
+  }
+
+
+  /* Entries */
+
+  .entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2.25rem;
+  }
+
+  .entry {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .group-label {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+  }
+
+  .entry code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    color: var(--strong);
+  }
+
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.375rem;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--strong);
+  }
+
+  .meta {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .points li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+
+  .points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.45rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .points strong {
+    font-weight: 600;
+    color: var(--strong);
+  }
+
+  .points code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    font-weight: 500;
+    color: var(--strong);
+  }
+
+  .flow {
+    --flow-gap: 2.25rem;
+    list-style: none;
+    margin: 0.4rem 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--flow-gap);
+  }
+
+  .flow li {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    padding: 1rem 1.1rem 1.15rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+
+  .flow li + li::before {
+    content: "\2192";
+    content: "\2192" / "";
+    position: absolute;
+    top: 50%;
+    left: calc(var(--flow-gap) / -2);
+    transform: translate(-50%, -50%);
+    font-family: var(--mono);
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .flow-name {
+    color: var(--strong);
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .flow-note {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* Shown only while engine-flow's script has yet to run; the script then moves it into a card. */
+  .flow-detail {
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  engine-flow .flow { grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
+
+  /* Stat tiles: a large figure first, then its label, an optional chart, and a note. */
+
+  .stats {
+    margin: 0.4rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1rem 1.1rem 1.15rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+
+  .stat dt {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stat dd { margin: 0; }
+
+  .stat-value {
+    order: -1;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    color: var(--strong);
+  }
+
+  .stat .stat-note {
+    margin-top: auto;
+    padding-top: 0.2rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* A tally draws one dot per counted item: two rows of thirteen, with the mask hiding the last dot to leave twenty-five. */
+  .stat .tally {
+    width: 11.7rem;
+    height: 1.8rem;
+    margin-top: 0.2rem;
+    background: radial-gradient(circle, var(--accent) 0 38%, transparent 42%) 0 0 / 0.9rem 0.9rem space;
+    mask:
+      linear-gradient(#000 0 0) 0 0 / 100% 50% no-repeat,
+      linear-gradient(#000 0 0) 0 100% / calc(100% - 0.9rem) 50% no-repeat;
+  }
+
+  /* The split bar divides one total by share, and the legend beneath it gives each share's colour. */
+  .split {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+  }
+
+  .split-bar {
+    display: flex;
+    gap: 2px;
+    height: 0.5rem;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .split-bar span { flex: var(--share) 0 0; }
+
+  .split-bar span:nth-child(1),
+  .split-legend li:nth-child(1)::before { background: var(--gold); }
+
+  .split-bar span:nth-child(2),
+  .split-legend li:nth-child(2)::before { background: var(--bronze); }
+
+  .split-bar span:nth-child(3),
+  .split-legend li:nth-child(3)::before { background: var(--line); }
+
+  .split-legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    color: var(--ink);
+  }
+
+  .split-legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .split-legend li::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 1px;
+  }
+
+  /* Projects: cards with a one-line hook and the full description in a fold. */
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 1.15rem 1.3rem 0;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+
+  .project-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+  }
+
+  .project h3 { font-size: 1.35rem; }
+
+  .project-hook { line-height: 1.5; }
+
+  .project code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    color: var(--strong);
+  }
+
+  .project .project-more {
+    margin-top: auto;
+    border-top: 1px dashed var(--line);
+    border-bottom: 0;
+  }
+
+  .project .project-more summary {
+    padding: 0.65rem 0 0.75rem;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .project-more .fold-body { font-size: 0.95rem; line-height: 1.55; }
+
+  /* An opening paragraph with one stat tile beside it. */
+  .lead-stat {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 15rem;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  .lead-stat .stats {
+    margin: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Hard problems: the first entry and any marked wide span the full width, and the smaller ones
+     pair up as cards. */
+  .problems { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.25rem; }
+
+  .problems > .entry:first-child,
+  .problems > .entry-wide {
+    grid-column: 1 / -1;
+    margin-bottom: 0.5rem;
+  }
+
+  .entry-card {
+    align-content: start;
+    padding: 1.1rem 1.25rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+
+  .entry-card h3 { font-size: 1.2rem; }
+
+  .entry-card .tags { margin-top: auto; }
+
+  /* Folds: supporting detail a reader opens on request, one per line of a ruled list. */
+
+  .folds {
+    display: grid;
+    border-top: 1px solid var(--line);
+  }
+
+  .fold { border-bottom: 1px solid var(--line); }
+
+  .fold summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--strong);
+  }
+
+  .fold summary::-webkit-details-marker { display: none; }
+
+  .fold summary::after {
+    content: "+";
+    flex: none;
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+  }
+
+  .fold[open] summary::after { transform: rotate(45deg); }
+
+  .fold summary:hover { color: var(--accent-2); }
+
+  .fold summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .fold-body {
+    display: grid;
+    gap: 0.85rem;
+    padding-bottom: 1rem;
+  }
+
+  ol.folds {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ol.folds > li { border-bottom: 1px solid var(--line); }
+
+  ol.folds > li > .fold { border-bottom: 0; }
+
+  /* Jobs: each role is one fold, whose summary gives the entry head and a one-line hook. */
+  .jobs {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+
+  .job summary {
+    align-items: start;
+    padding: 0.95rem 0;
+  }
+
+  .job summary::after { margin-top: 0.3rem; }
+
+  .job-line {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .job-hook {
+    font-family: var(--text);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .job h3 { font-size: 1.2rem; }
+
+  /* The role and dates sit under the heading, away from the fold's "+". */
+  .job .entry-head {
+    display: grid;
+    justify-content: start;
+    gap: 0.2rem;
+  }
+
+  .job summary:hover h3,
+  .job summary:hover .job-hook { color: var(--accent-2); }
+
+  /* Education: a vertical timeline, with dates in the left column and a rail joining one dot per
+     entry. The dots are outlined like the study bars of the career timeline, and the current
+     entry's dot is filled. */
+  .edu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+  }
+
+  .edu-item {
+    --when: 8.5rem;
+    --rail-gap: 2.25rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--when) minmax(0, 1fr);
+    column-gap: var(--rail-gap);
+    padding-bottom: 2.25rem;
+  }
+
+  .edu-item:last-child { padding-bottom: 0; }
+
+  .edu-when {
+    padding-top: 0.3rem;
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .edu-body {
+    display: grid;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+
+  .edu-item::before {
+    content: "";
+    position: absolute;
+    top: 1.1rem;
+    bottom: -0.55rem;
+    left: calc(var(--when) + var(--rail-gap) / 2);
+    width: 1px;
+    background: var(--line);
+  }
+
+  .edu-item:last-child::before { display: none; }
+
+  .edu-item::after {
+    content: "";
+    position: absolute;
+    top: 0.55rem;
+    left: calc(var(--when) + var(--rail-gap) / 2);
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--paper);
+    box-shadow: inset 0 0 0 1.5px var(--accent);
+    transform: translateX(-50%);
+  }
+
+  .edu-current::after {
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+
+  /* Summary */
+
+  html { scroll-behavior: smooth; }
+
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 1.25rem;
+    padding-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .widget {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 1.1rem;
+    min-width: 0;
+    padding: 1.2rem 1.35rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .widget:hover,
+  .widget:focus-within {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+
+  .widget-link {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+  }
+
+  .widget-link:focus-visible { outline: none; }
+
+  /* The link's overlay covers the whole card, so a click anywhere on the card follows the link. */
+  .widget-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: 6px;
+  }
+
+  .widget-link:focus-visible::after {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .widget-arrow { color: var(--accent); }
+
+  /* The timeline sits above the overlay so its bars stay clickable, and lets every other click
+     fall through to the link beneath it. */
+  .widget career-timeline {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  skill-bands dl { margin: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .widget { transition: none; }
+    .fold summary::after { transition: none; }
+    .skill-inner { transition: none; }
+    .widget:hover, .widget:focus-within { transform: none; }
+  }
+
+  /* Skills */
+
+  /* Each skill is a card that flips on hover or focus, with the tools on its front and the
+     paragraph on its back. Both faces share one grid cell, so a card is as tall as its taller face.
+     A tap focuses the card on a touch screen, so the flip needs no script. */
+  .skills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  /* The two skills with the longest backs span the full row, so no card's back is much taller than
+     its front. */
+  .skill-wide { grid-column: 1 / -1; }
+
+  .skill {
+    perspective: 1400px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .skill:focus { outline: none; }
+
+  .skill:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .skill-inner {
+    display: grid;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .skill:hover .skill-inner,
+  .skill:focus .skill-inner {
+    transform: rotateY(180deg);
+  }
+
+  .skill-face {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-width: 0;
+    padding: 1.15rem 1.3rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .skill-front h3 { font-size: 1.4rem; }
+
+  .skill-back {
+    gap: 0.6rem;
+    border-color: var(--accent);
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transform: rotateY(180deg);
+  }
+
+  .skill-label {
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .skill-hint {
+    margin-top: auto;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .skill-hint .on-touch { display: none; }
+
+  @media (hover: none) {
+    .skill-hint .on-hover { display: none; }
+    .skill-hint .on-touch { display: inline; }
+  }
+
+  .tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .tags li {
+    padding: 0.45rem 0.6rem;
+    border-radius: 3px;
+    background: var(--accent-soft);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* Hobbies */
+
+  .hobbies {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .hobbies li {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    align-items: start;
+    column-gap: 0.85rem;
+  }
+
+  /* Icons8 Puffy Filled icons used as masks, painted in the accent colour like the section icons. */
+  .hobby-icon {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--accent);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .hobby-icon-coding { -webkit-mask-image: url("icons/hobby-coding.png"); mask-image: url("icons/hobby-coding.png"); }
+  .hobby-icon-chess { -webkit-mask-image: url("icons/hobby-chess.png"); mask-image: url("icons/hobby-chess.png"); }
+  .hobby-icon-maths { -webkit-mask-image: url("icons/hobby-maths.png"); mask-image: url("icons/hobby-maths.png"); }
+  .hobby-icon-reading { -webkit-mask-image: url("icons/hobby-reading.png"); mask-image: url("icons/hobby-reading.png"); }
+
+  .hobby-text {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .hobby-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--strong);
+  }
+
+  .hobby-note {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  /* Credits */
+
+  /* Extras: the optional pages, offered as cards that behave like the summary widgets. */
+  .extras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* A page of writing, such as the habits page, sets its own rhythm. */
+  .prose {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .prose h3 { margin-top: 0.9rem; }
+
+  .pull {
+    margin: 0.4rem 0;
+    padding-left: 1.1rem;
+    border-left: 2px solid var(--accent);
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--strong);
+  }
+
+  /* A quiet link onward, such as the one to the hobbies page. */
+  .more a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+  }
+
+  .more a:hover { color: var(--accent-2); }
+
+  .more-arrow { color: var(--accent); }
+
+  /* The hobbies page shares this stylesheet and heads itself with a smaller name. */
+  .masthead-compact h1 { font-size: clamp(2.25rem, 6vw, 3.5rem); }
+
+  .credits {
+    display: grid;
+    gap: 0.4rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  /* Narrow screens */
+
+  @media screen and (max-width: 48rem) {
+    .section { grid-template-columns: minmax(0, 1fr); }
+    .summary { grid-template-columns: minmax(0, 1fr); }
+    .problems { grid-template-columns: minmax(0, 1fr); }
+
+    /* The dates move above each entry, and the rail runs down the left edge. */
+    .edu-item {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.3rem;
+      padding-left: 1.6rem;
+    }
+
+    .edu-when { padding-top: 0; text-align: left; }
+
+    .edu-item::before,
+    .edu-item::after { left: 0.35rem; }
+
+    .edu-item::after { top: 0.35rem; }
+  }
+
+  @media screen and (max-width: 64rem) {
+    .skills { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @media screen and (max-width: 56rem) {
+    .lead-stat { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @media screen and (max-width: 40rem) {
+    .flow {
+      --flow-gap: 1.75rem;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .flow li + li::before {
+      content: "\2193";
+      content: "\2193" / "";
+      top: calc(var(--flow-gap) / -2);
+      left: 1.1rem;
+      transform: translate(0, -50%);
+    }
+  }
+
+  /* Print */
+
+  @media print {
+    @page { margin: 15mm 16mm; }
+
+    body { font-size: 10pt; line-height: 1.5; }
+    .page { max-width: none; padding: 0; }
+    .masthead { padding-bottom: 8mm; }
+    h1 { font-size: 36pt; }
+    .section { --section-pad: 6mm; grid-template-columns: 28mm minmax(0, 1fr); }
+    .flow, .points li, .tags, .stat, .fold, .project { break-inside: avoid; }
+    .entry-head { break-after: avoid; }
+    .skill { break-inside: avoid; }
+    .skill-inner { display: block; transform: none !important; }
+    .skill-face { padding: 0; border: 0; background: none; box-shadow: none; }
+    .skill-back { margin-top: 0.5rem; transform: none; }
+    .skill-hint, .skill-label { display: none; }
+    .fold summary::after { display: none; }
+    .flow li, .tags li, .stat, .tally, .edu-item::before, .edu-item::after, .split-bar span, .split-legend li::before,.points li::before, .section > h2::before, .hobby-icon, .contact a::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    a { text-decoration: none; }
+    .summary { display: none; }
+    a[data-print]::after { content: " (" attr(data-print) ")"; color: var(--muted); }
+  }
